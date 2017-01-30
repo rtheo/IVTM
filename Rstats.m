@@ -7,7 +7,7 @@ clc, close all
 if mod(n, 3)~=0, n=n-mod(n,3);end, newdim=floor(n/3);
 switch ntype
     case 0, vo = floor( 16*rand(1,n) ); % flat noise
-    case 1, vo = floor( randn(1, n) ); % gaussian noise
+    case 1, vo = randn(1, n);           % gaussian noise
     case 2, vo = cumsum( rand(1,n) - 0.5 ); % simplified Brownian
 end
 if ntype>0
