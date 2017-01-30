@@ -14,7 +14,7 @@ else
 end
 vo = reshape(vo, 3, newdim); 
 rs = R(  vo(1, :)+16*vo(2, :) + 1 ); 
-s = abs( rs - vo(3, :) ) < 1/16; % matching filter
+s = abs( rs - vo(3, :) ) == 0; % matching filter
 [cd cv] = clusters(s); cc = -cv(cv<0);
 %hist(cc, m)
 figure(1), h=hist(cc, m); title(['Tansition Intervals.: ',num2str(cd)])
