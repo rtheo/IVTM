@@ -14,11 +14,11 @@ p=floor(mem/2);
 if init
     t = u( randint(1, mem, [1, 12] ) );
 else
-    t = 3*ones(1, mem); t(p) = rand;
+    t = 3*ones(1, mem); t(p) = 2; 
 end
 switch ntype
-    case 0, rn = floor(16*rand(1,steps)); % flat noise
-    case 1, rn = randn(1, steps);           % gaussian noise
+    case 0, rn = ceil(16*rand(1, steps)) - 1; % flat noise
+    case 1, rn = randn(1, steps);             % gaussian noise
     case 2, rn = cumsum( rand(1, steps) - 0.5 ); % simplified Brownian               
 end
 if ntype>0,  rn = rn + abs(min(rn)) + 1; rn = rn/(max(rn)+1); rn = floor( 16*rn ); end % rescale to 4-bits
@@ -27,6 +27,7 @@ wt = zeros(1, steps); % waiting times record
 ptr = wt;
 for i=1:steps
     [t, p, p0, m] = tm2aca(R, t, p, p0, rn(i)); % the machine kernel + matching filter
+    if p==0 || p==mem, disp( ['Reached end-of-Tape! step=',num2str(i)] ), break; end
     if m, 
         k=k+1; wt(k) = 1;
     else
