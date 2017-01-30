@@ -21,7 +21,7 @@ switch ntype
     case 1, rn = randn(1, steps);           % gaussian noise
     case 2, rn = cumsum( rand(1, steps) - 0.5 ); % simplified Brownian               
 end
-if type>0,  rn = rn + abs(min(rn)) + 1; rn = rn/(max(rn)+1); rn = floor( 16*rn ); end % rescale to 4-bits
+if ntype>0,  rn = rn + abs(min(rn)) + 1; rn = rn/(max(rn)+1); rn = floor( 16*rn ); end % rescale to 4-bits
 k = 1; p0 = p; 
 wt = zeros(1, steps); % waiting times record
 ptr = wt;
